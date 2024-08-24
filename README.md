@@ -1,10 +1,35 @@
 # ComfyUI_NetDist Plus
 Run ComfyUI workflows on multiple local GPUs/networked machines with options to edit the json values within comfyui.
 # Credits
-[City96](https://github.com/city96); without the base netdist repo, I wouldn't have attempted this.
-[EventStationAI](https://www.eventstation.ai/); for some GPU support.
-[Claude](https://console.anthropic.com/dashboard); what do I do next? Can you debug this error?
-[Ogkai](https://civitai.com/user/ogkai_1111); Thanks for encouraging me to start pushing stuffs I make or modify.
+[Comfyanonymous](https://github.com/comfyanonymous/ComfyUI); for obvious reasons <br>
+[City96](https://github.com/city96/ComfyUI_NetDist); without the base netdist repo, I wouldn't have attempted this. <br>
+[EventStationAI](https://www.eventstation.ai/); for some GPU support. <br>
+All node creators that I used their work in some ways in the creation of the workflows or code snippets. (Easy Use, Ipadapter_Plus, CR) <br>
+[Claude](https://console.anthropic.com/dashboard); what do I do next? Can you debug this error? <br>
+[Ogkai](https://civitai.com/user/ogkai_1111); Thanks for encouraging me to start pushing stuffs I make or modify. <br>
+*On [twitter(X)](https://x.com/NuxZoe) if you have questions :) 
+
+#Issues
+*Remote Latents: I didn't get a chance to test it.
+*Batched Base64 images: There are existing node that should fix that.
+*Batch size > 1 for STYLE TRANSFER: Didn't take note of the errors I got but that needs some work.
+
+#Note: I am a primitive coder and I know very little about github. Bear with me if issues arise. Of course collabs are awesome.
+
+#Remote conditioning Workflow
+The use case for this is running T5 and clip L on a different comfy instance so the primary PC can focus on running UNET and VAE.
+
+![REMOTE_CLIP_OFFSET](https://github.com/nux1111/ComfyUI_NetDist_Plus/blob/main/WORKFLOWS/FLUX_REMOTE_CONDITIONING.png)
+
+#Remote Batch Workflow with different checkpoints
+This workflow is useful for comparing Flux Dev and Schnell models. Since the remote pc runs the Schnell, it is bearable.
+
+![REMOTE_BATCH](https://github.com/nux1111/ComfyUI_NetDist_Plus/blob/main/WORKFLOWS/FLUX_REMOTE_BATCH.png)
+
+#Style Transfer Example
+This uses a remote pc to run a SDXL ipadapter style transfer pipe.
+
+![REMOTE_STYLETRANSFER](https://github.com/nux1111/ComfyUI_NetDist_Plus/blob/main/WORKFLOWS/FLUX_PSUEDO_STYLETRANSFER.png)
 
 
 
