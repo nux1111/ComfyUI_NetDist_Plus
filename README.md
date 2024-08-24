@@ -31,7 +31,8 @@ This uses a remote pc to run a SDXL ipadapter style transfer pipe.
 
 ![REMOTE_STYLETRANSFER](https://github.com/nux1111/ComfyUI_NetDist_Plus/blob/main/WORKFLOWS/FLUX_PSUEDO_STYLETRANSFER.png)
 
-
+## Making remote conds
+![REMOTE_conds](https://github.com/nux1111/ComfyUI_NetDist_Plus/blob/main/WORKFLOWS/making_remote_conditioning.png)
 
 [NetDist_2xspeed.webm](https://github.com/city96/ComfyUI_NetDist/assets/125218114/b7ec2fcf-1e51-4b05-ad62-355da2a1bf6d)
 
