@@ -10,9 +10,9 @@ All node creators that I used their work in some ways in the creation of the wor
 *On [twitter(X)](https://x.com/NuxZoe) if you have questions :) 
 
 ## Issues
-*Remote Latents: I didn't get a chance to test it.
-*Batched Base64 images: There are existing node that should fix that.
-*Batch size > 1 for STYLE TRANSFER: Didn't take note of the errors I got but that needs some work.
+*Remote Latents: I didn't get a chance to test it. <br>
+*Batched Base64 images: There are existing node that should fix that. <br>
+*Batch size > 1 for STYLE TRANSFER: Didn't take note of the errors I got but that needs some work. <br>
 
 ## Note: I am a primitive coder and I know very little about github. Bear with me if issues arise. Of course collabs are awesome. The listed examples were done one a 4090 host and 3080ti remote pc.
 
