@@ -329,13 +329,18 @@ class ConditioningFromBase64:
             cond_data = torch.from_numpy(cond_data_np)
             cond_meta = {k: torch.from_numpy(v) if isinstance(v, np.ndarray) else v for k, v in cond_meta_serializable.items()}
             
-            # Reconstruct the conditioning object
-            conditioning = [[cond_data, cond_meta]]
+            # Check if we're dealing with the original format or the new embeds format
+            if cond_meta:
+                # Original format: [[cond, output]]
+                conditioning = [[cond_data, cond_meta]]
+            else:
+                # New format: embeds
+                conditioning = cond_data
             
             return (conditioning,)
-        
         except Exception as e:
-            raise ValueError(f"Failed to load conditioning from base64: {str(e)}")
+            print(f"Error in convert function: {str(e)}")
+            return None
 
 def align_text(align, img_height, text_height, text_pos_y, margins):
     if align == "center":
@@ -461,19 +466,20 @@ class SaveImageWithBase64:
 	OUTPUT_NODE = True
 	CATEGORY = "image"
 	TITLE = "save conds and latents"
-
 	def save_images(self, images, filename_prefix="ComfyUI", workflowName="", latent=None, positive_conditioning=None, negative_conditioning=None, prompt=None, extra_pnginfo=None):
-
 		def convertconditioning(conditioning):
-			cond_data, cond_meta = conditioning[0]
-			# Convert tensors to numpy arrays
+			if isinstance(conditioning, list) and len(conditioning) > 0 and isinstance(conditioning[0], list):
+				# Conditioning is a tuple (cond_data, cond_meta)
+				cond_data, cond_meta = conditioning[0]
+			else:
+				# Conditioning is a single tensor
+				cond_data = conditioning
+				cond_meta = {}
 			cond_data_np = cond_data.cpu().numpy()
 			cond_meta_serializable = {k: v.cpu().numpy() if isinstance(v, torch.Tensor) else v for k, v in cond_meta.items()}
 			# Combine data and metadata into a single dictionary
-			combined_data = {
-				"cond_data": cond_data_np,
-				"cond_meta": cond_meta_serializable
-			}
+			combined_data = {"cond_data": cond_data_np, "cond_meta": cond_meta_serializable }
+
 			# Save the combined data to a bytes buffer
 			buffer = io.BytesIO()
 			np.savez_compressed(buffer, **combined_data)
@@ -534,7 +540,7 @@ class SaveImageWithBase64:
 				metadata.add_text("conditioning_base64", p_conditioning_base64)
 			if negative_conditioning is not None:
 				n_conditioning_base64 = convertconditioning(negative_conditioning)
-				metadata.add_text("conditioning_base64", n_conditioning_base64)
+				metadata.add_text("neg_conditioning_base64", n_conditioning_base64)
 			filename_with_batch_num = filename.replace("%batch_num%", str(batch_number))
 			file = f"{filename_with_batch_num}_{counter:05}_.png"
 			img.save(os.path.join(full_output_folder, file), pnginfo=metadata, compress_level=self.compress_level)

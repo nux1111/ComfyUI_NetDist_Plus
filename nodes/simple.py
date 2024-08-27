@@ -53,8 +53,8 @@ class FetchRemoteWithExtras():
             },
         }
 
-    RETURN_TYPES = ("IMAGE", "STRING", "STRING")
-    RETURN_NAMES = ("IMAGE", "latent_base64", "conditioning_base64")
+    RETURN_TYPES = ("IMAGE", "STRING", "STRING", "STRING")
+    RETURN_NAMES = ("IMAGE", "latent_base64", "P_conditioning_base64", "N_conditioning_base64")
     FUNCTION = "fetch"
     CATEGORY = "remote"
     TITLE = "Fetch from remote"
@@ -68,9 +68,10 @@ class FetchRemoteWithExtras():
             out = final_image[:1] * 0.0 # black image
         
         latent = metadata.get("latent_base64", None)
-        conditioning = metadata.get("conditioning_base64", None)
+        p_conditioning = metadata.get("conditioning_base64", None)
+        n_conditioning = metadata.get("neg_conditioning_base64", None)
         
-        return (out, latent, conditioning)
+        return (out, latent, p_conditioning, n_conditioning)
 
 import ast
 
