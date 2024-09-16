@@ -1,0 +1,15 @@
+[project]
+name = "comfyui_netdist_plus"
+description = "Run ComfyUI workflows on multiple local GPUs/networked machines with options to edit the json values within comfyui.\nOriginal repo: [a/city96/ComfyUI_NetDist](https://github.com/city96/ComfyUI_NetDist)"
+version = "1.0.0"
+license = {file = "LICENSE"}
+dependencies = ["requests>=2.28.2"]
+
+[project.urls]
+Repository = "https://github.com/nux1111/ComfyUI_NetDist_Plus"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI_NetDist_Plus"
+Icon = ""
